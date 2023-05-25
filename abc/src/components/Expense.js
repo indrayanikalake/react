@@ -2,20 +2,22 @@
 import './Expense.css';
 import React from 'react';
 
-export default function Expense() {
-    const expenseDate=new Date(2023,2,28);
-    const expenseTitle='Car Insurance';
-    const expenseAmount=249;
-    const locationOfExpenditure = 'Auto Insurance Company';
+export default function Expense(props) {
+    const { expenses } = props;
   return (
-    <div className='expense-item'>
-     <div>{expenseDate.toISOString()}</div>
-     <div className='expense-item__description'>
-        <h2>{expenseTitle}</h2>
-        <div className='expense-item__price'>${expenseAmount}</div>
-        <div>{locationOfExpenditure}</div>
-     </div>
-    </div>
+
+    <div>
+    {expenses && expenses.map((expense, index) => (
+      <div className='expense-item' key={index}>
+        <div>{expense.expenseDate.toISOString()}</div>
+        <div className='expense-item__description'>
+          <h3>{expense.expenseTitle}</h3>
+          <div className='expense-item__price'>${expense.expenseAmount}</div>
+          <div>{expense.locationOfExpenditure}</div>
+        </div>
+      </div>
+    ))}
+  </div>
   )
 }
 
