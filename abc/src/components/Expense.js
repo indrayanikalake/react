@@ -1,32 +1,24 @@
-
-import './Expense.css';
 import React from 'react';
+import './Expense.css';
+import ExpenseDetails from './ExpenseDetails';
+import Package from './UI/Package';
 
-export default function Expense(props) {
-    const {expenses}=props;
-    
+
+const Expense = (props) => {
   return (
-
-    <div>
-      
-    {expenses && expenses.map((expense, index) => (
-    <div className='expense-item' key={index}>
-      <div>
-      <div>{expense.date.toLocalString('en-US',{month : 'long'})}</div>
-      <div>{expense.date.toLocalString('en-US',{day : '2-digit'})}</div>
-      <div>{expense.date.getFullYear()}</div>
-      </div>
-      <div className='expense-item__description'>
-        <h3>{expense.title}</h3>
-        <div className='expense-item__price'>${expense.expenseAmount}</div>
-        <div>{expense.locationOfExpenditure}</div>
-      </div>
-    </div>
-  ))}
-
-  </div>
+    
+        <div className='main'>
+    <div className='expense-details'>
+      <ExpenseDetails date={props.date} location={props.locationOfExpenditure} />
+      <div>{props.title}</div>
+      <div className='amount'>${props.amount}</div>
      
-
+    </div>
+    </div>
+    
   )
 }
+
+export default Expense
+
 

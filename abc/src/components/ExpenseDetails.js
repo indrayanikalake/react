@@ -1,20 +1,22 @@
-import React from 'react'
-import './Expense.css'
-export default function ExpenseDetails(props) {
-    const {expenses}=props;
-  return (
-    <div>
-      
-      {expenses && expenses.map((expense, index) => (
-      <div className='expense-item' key={index}>
-       
-        <div className='expense-item__description'>
-          <h3>{expense.title}</h3>
-          <div className='expense-item__price'>${expense.expenseAmount}</div>
-        </div>
-      </div>
-    ))}
 
+import React from 'react';
+import './ExpenseDetails.css'
+
+const ExpenseDetails=(props) =>{
+   const month=props.date.toLocaleString('en-US',{month:'long'});
+   const day=props.date.toLocaleString('en-US',{day:'2-digit'});
+   const year=props.date.getFullYear();
+  return (
+    <div className='expense-items'>
+        <div className='items'>
+        <div>{month}</div>
+        <div>{day}</div>
+        <div>{year}</div>
+        </div>
+     
+      <div>{props.location}</div>
     </div>
-  )
+  );
 }
+
+export default ExpenseDetails;
