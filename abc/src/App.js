@@ -1,5 +1,6 @@
 import React from 'react';
 import Expense from './components/Expense';
+import ExpenseForm from './ExpenseForm';
 
 const App=() =>{
   const expenses = [
@@ -28,6 +29,9 @@ const App=() =>{
 
   return (
     <div >
+      <h1>Expense Tracker</h1>
+      <ExpenseForm />
+      
       { expenses.map((expense) => (
         <Expense
           key={expense.id}
