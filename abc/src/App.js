@@ -1,6 +1,9 @@
-import React from 'react';
+
+import {useState} from 'react';
 import Expense from './components/Expense';
-import ExpenseForm from './ExpenseForm';
+import ExpenseForm from './newComponent/ExpenseForm';
+import DesignPatternWithState from './newComponent/DesignPatternWithState';
+import NewExpense from './newComponent/NewExpense';
 
 const App=() =>{
   const expenses = [
@@ -27,10 +30,18 @@ const App=() =>{
     },
   ];
 
+  const [expense,setExpense]= useState([]);
+
+  const addExpenseHandler=expense=>{
+   setExpense((prevExpense)=>{
+    return [...prevExpense,expense]
+   })
+  }
+
   return (
     <div >
       <h1>Expense Tracker</h1>
-      <ExpenseForm />
+   <NewExpense onAddExpense={addExpenseHandler}/>
       
       { expenses.map((expense) => (
         <Expense
