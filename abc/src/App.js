@@ -5,6 +5,10 @@ import ExpenseForm from './newComponent/ExpenseForm';
 import DesignPatternWithState from './newComponent/DesignPatternWithState';
 import NewExpense from './newComponent/NewExpense';
 import ExpenseFilter from './ExpenseFilter';
+import ExpenseList from './ExpenseList';
+import './App.css';
+
+
 const dummy_expenses = [
   {
     id: 'e1',
@@ -36,7 +40,7 @@ const App=() =>{
 
   const addExpenseHandler=(expense)=>{
    setExpenses((prevExpense)=>{
-    return [expense,...prevExpense]
+    return [expense,...prevExpense];
    })
   }
 
@@ -52,30 +56,27 @@ const App=() =>{
     return expenseYear===filteredYear;  
   })
   console.log(filteredExpenses);
-  let expenseContent=<p>No Expenses found.</p>
-  if(filteredExpenses.length>0){
-    expenseContent=filteredExpenses.map((expense)=>(
-      <Expense
-      key={expense.id}
-      title={expense.title}
-      amount={expense.amount}
-      date={new Date(expense.date)}
-      locationOfExpenditure={expense.locationOfExpenditure}
-    />
-    ))
-  }
+  
 
   return (
-    <div >
+    <div className='app'>
       <h1>Expense Tracker</h1>
    
    <NewExpense onAddExpense={addExpenseHandler}/>
    <card>
-   <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-   {expenseContent}
+   <ExpenseFilter  className="op" elected={filteredYear} onChangeFilter={filterChangeHandler} />
+   <ExpenseList expenses={filteredExpenses} />
    </card>
   
-    
+   { expenses.map((expense) => (
+        <Expense
+          key={expense.id}
+          title={expense.title}
+          amount={expense.amount}
+          date={new Date(expense.date)}
+          locationOfExpenditure={expense.locationOfExpenditure}
+        />
+      ))}
   
     </div>
   );
