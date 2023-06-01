@@ -4,54 +4,79 @@ import Expense from './components/Expense';
 import ExpenseForm from './newComponent/ExpenseForm';
 import DesignPatternWithState from './newComponent/DesignPatternWithState';
 import NewExpense from './newComponent/NewExpense';
+import ExpenseFilter from './ExpenseFilter';
+const dummy_expenses = [
+  {
+    id: 'e1',
+    title: 'Insurance',
+    amount: 294.67,
+    date: new Date(2023, 2, 28),
+    locationOfExpenditure: 'city A',
+  },
+  {
+    id: 'e2',
+    title: 'Rent',
+    amount: 1100,
+    date: new Date(2023, 3, 15),
+    locationOfExpenditure: 'city B',
+  },
+  {
+    id: 'e3',
+    title: 'Groceries',
+    amount: 64.92,
+    date: new Date(2023, 4, 7),
+    locationOfExpenditure: 'city C',
+  },
+];
+
 
 const App=() =>{
-  const expenses = [
-    {
-      id: 'e1',
-      title: 'Insurance',
-      amount: 294.67,
-      date: new Date(2023, 2, 28),
-      locationOfExpenditure: 'city A',
-    },
-    {
-      id: 'e2',
-      title: 'Rent',
-      amount: 1100,
-      date: new Date(2023, 3, 15),
-      locationOfExpenditure: 'city B',
-    },
-    {
-      id: 'e3',
-      title: 'Groceries',
-      amount: 64.92,
-      date: new Date(2023, 4, 7),
-      locationOfExpenditure: 'city C',
-    },
-  ];
+  
+  const [expenses,setExpenses]= useState(dummy_expenses);
 
-  const [expense,setExpense]= useState([]);
-
-  const addExpenseHandler=expense=>{
-   setExpense((prevExpense)=>{
-    return [...prevExpense,expense]
+  const addExpenseHandler=(expense)=>{
+   setExpenses((prevExpense)=>{
+    return [expense,...prevExpense]
    })
+  }
+
+  
+
+  const [filteredYear, setFilteredYear]= useState('2020');
+  const filterChangeHandler=(selectedYear)=>{
+    setFilteredYear(selectedYear);
+  }
+
+  const filteredExpenses=expenses.filter((expense)=>{
+    const expenseYear = new Date(expense.date).toLocaleDateString('en-US', { year: 'numeric' });
+    return expenseYear===filteredYear;  
+  })
+  console.log(filteredExpenses);
+  let expenseContent=<p>No Expenses found.</p>
+  if(filteredExpenses.length>0){
+    expenseContent=filteredExpenses.map((expense)=>(
+      <Expense
+      key={expense.id}
+      title={expense.title}
+      amount={expense.amount}
+      date={new Date(expense.date)}
+      locationOfExpenditure={expense.locationOfExpenditure}
+    />
+    ))
   }
 
   return (
     <div >
       <h1>Expense Tracker</h1>
+   
    <NewExpense onAddExpense={addExpenseHandler}/>
-      
-      { expenses.map((expense) => (
-        <Expense
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-          locationOfExpenditure={expense.locationOfExpenditure}
-        />
-      ))}
+   <card>
+   <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
+   {expenseContent}
+   </card>
+  
+    
+  
     </div>
   );
 }
