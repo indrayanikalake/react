@@ -65,7 +65,7 @@ const App=() =>{
    <NewExpense onAddExpense={addExpenseHandler}/>
    <card>
    <ExpenseFilter  className="op" elected={filteredYear} onChangeFilter={filterChangeHandler} />
-   <ExpenseList expenses={filteredExpenses} />
+   <ExpenseList className="lists" expenses={filteredExpenses} />
    </card>
   
    { expenses.map((expense) => (

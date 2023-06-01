@@ -11,7 +11,7 @@ const ExpenseList = (props) => {
   }
   if (expenses.length === 1) {
     return (
-      <div>
+      <div className='list'>
         <Expense
           key={expenses[0].id}
           title={expenses[0].title}
@@ -19,7 +19,7 @@ const ExpenseList = (props) => {
           date={new Date(expenses[0].date)}
           locationOfExpenditure={expenses[0].locationOfExpenditure}
         />
-        <p>Only single Expense here. Please add more...</p>
+        <p className='p'>Only single Expense here. Please add more...</p>
       </div>
     );
   }
