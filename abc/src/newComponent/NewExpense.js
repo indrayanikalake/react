@@ -40,7 +40,11 @@ const NewExpense = () => {
         {!showForm && <button onClick={showFormHandler}>Add Expense</button>}
         {showForm && (
         <ExpenseForm
-          onAddExpense={addExpenseHandler}
+          onAddExpense={(expenseData) => {
+            addExpenseHandler(expenseData);
+            hideFormHandler();
+          }}
+         
           enteredTitle={enteredTitle}
           enteredAmount={enteredAmount}
           enteredDate={enteredDate}
