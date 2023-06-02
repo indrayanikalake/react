@@ -2,7 +2,7 @@ import React from 'react'
 import ChartBar from './ChartBar'
 
 const Chart = (props) => {
-    const dataPointvalues=dataPoints.map(dataPoint=>dataPoint.value);
+    const dataPointvalues=props.dataPoints.map(dataPoint=>dataPoint.value);
     const totalMax=Math.max(...dataPointvalues);
 
   return (
