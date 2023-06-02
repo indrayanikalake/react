@@ -6,6 +6,7 @@ import DesignPatternWithState from './newComponent/DesignPatternWithState';
 import NewExpense from './newComponent/NewExpense';
 import ExpenseFilter from './ExpenseFilter';
 import ExpenseList from './ExpenseList';
+import ExpenseChart from './components/ExpenseChart';
 import './App.css';
 
 
@@ -66,17 +67,9 @@ const App=() =>{
    <card>
    <ExpenseFilter  className="op" elected={filteredYear} onChangeFilter={filterChangeHandler} />
    <ExpenseList className="lists" expenses={filteredExpenses} />
+   <ExpenseChart expenses={filteredExpenses}/>
    </card>
-  
-   { expenses.map((expense) => (
-        <Expense
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={new Date(expense.date)}
-          locationOfExpenditure={expense.locationOfExpenditure}
-        />
-      ))}
+   
   
     </div>
   );
